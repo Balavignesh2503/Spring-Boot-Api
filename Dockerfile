@@ -4,10 +4,13 @@ FROM eclipse-temurin:17-jdk-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy Gradle files
+# Copy all project files
 COPY . .
 
-# Build the app
+# Make gradlew executable
+RUN chmod +x gradlew
+
+# Build the app (skip tests)
 RUN ./gradlew build -x test
 
 # Expose port
