@@ -4,6 +4,9 @@ public class TaskDto {
 	private long id;
 	private String description;
 	private boolean completed;
+	public TaskDto() {
+		
+	}
 	
 	public TaskDto(long id, String description, boolean completed) {
 		this.id = id;
@@ -25,7 +28,7 @@ public class TaskDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public void setId(boolean completed) {
+	public void setCompleted(boolean completed) {
 		this.completed = completed;
 	}
 	

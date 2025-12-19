@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,12 +42,29 @@ public class HelloController {
 	}
 	private long idcount =0;
 	@PostMapping("/newtask")
-	public List<TaskDto> insert(@RequestParam TaskDto task){
+	public List<TaskDto> insert(@RequestBody TaskDto task){
 		task.setId(idcount++);		
 		list.add(task);
 		return list;	
 		
 	}
+	@GetMapping("/newtask")
+	public List<TaskDto> newtask(@RequestParam("description") String description,@RequestParam("completed") boolean completed){
+		TaskDto task = new TaskDto(idcount++,description,completed);
+		list.add(task);
+		return list;
+	}
+	@GetMapping("/updatetask")
+	public List<TaskDto> updatetask(@RequestParam("id") long id ,@RequestParam("description") String description,@RequestParam("completed") boolean completed){
+		for(TaskDto task : list) {
+			if(task.getId()==id) {
+				task.setDescription(description);
+				task.setCompleted(completed);
+			}
+		}
+		return list;
+	}
+	
 	
 	
 	
